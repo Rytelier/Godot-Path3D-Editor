@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://4dqu3m5gupc"]
+
+[ext_resource type="Shader" path="res://addons/Path3DEditor/Resources/Brush.gdshader" id="1_ovd0a"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_ovd0a")
+shader_parameter/color = Color(0, 1, 0, 1)

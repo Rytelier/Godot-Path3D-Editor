@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://dillaxognyx5s"]
+
+[ext_resource type="Material" uid="uid://4dqu3m5gupc" path="res://addons/Path3DEditor/Resources/Brush.tres" id="1_s3xjx"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2femq"]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 0.001
+cap_top = false
+cap_bottom = false
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_c7wtv"]
+top_radius = 0.0
+bottom_radius = 0.0
+height = 0.5
+radial_segments = 4
+rings = 1
+cap_top = false
+cap_bottom = false
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_t5bqd"]
+
+[node name="Brush" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_2femq")
+surface_material_override/0 = ExtResource("1_s3xjx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_c7wtv")
+surface_material_override/0 = ExtResource("1_s3xjx")
+
+[node name="Pointer" type="MeshInstance3D" parent="."]
+top_level = true
+material_override = ExtResource("1_s3xjx")
+cast_shadow = 0
+mesh = SubResource("ImmediateMesh_t5bqd")

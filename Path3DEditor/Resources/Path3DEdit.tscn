@@ -1,0 +1,253 @@
+[gd_scene load_steps=7 format=3 uid="uid://cd83xcafgqmlh"]
+
+[ext_resource type="Texture2D" uid="uid://2t6xnphtxwl2" path="res://addons/Path3DEditor/Resources/Add.svg" id="1_eockk"]
+[ext_resource type="Texture2D" uid="uid://bm56hsyig7b61" path="res://addons/Path3DEditor/Resources/Delete.svg" id="2_ini6o"]
+[ext_resource type="Texture2D" uid="uid://bsqs0w2rdfetm" path="res://addons/Path3DEditor/Resources/Move.svg" id="3_2iwpg"]
+[ext_resource type="Texture2D" uid="uid://d11vb2kyw1ssd" path="res://addons/Path3DEditor/Resources/Subdivide.svg" id="4_rgn5c"]
+[ext_resource type="Texture2D" uid="uid://bpqlie2qp1jtr" path="res://addons/Path3DEditor/Resources/Mask.svg" id="5_db7k0"]
+
+[sub_resource type="Theme" id="Theme_fphdo"]
+LineEdit/constants/minimum_character_width = 1
+
+[node name="Path3DEdit" type="Panel"]
+custom_minimum_size = Vector2(45, 0)
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 45.0
+grow_vertical = 2
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Add" type="Button" parent="Buttons"]
+layout_mode = 2
+tooltip_text = "Add"
+icon = ExtResource("1_eockk")
+
+[node name="Delete" type="Button" parent="Buttons"]
+layout_mode = 2
+tooltip_text = "Delete (alt)"
+icon = ExtResource("2_ini6o")
+
+[node name="Move" type="Button" parent="Buttons"]
+layout_mode = 2
+tooltip_text = "Move (space)"
+icon = ExtResource("3_2iwpg")
+
+[node name="Subdivide" type="Button" parent="Buttons"]
+layout_mode = 2
+tooltip_text = "Subdivide (shift)"
+icon = ExtResource("4_rgn5c")
+
+[node name="Above" type="SpinBox" parent="Buttons"]
+layout_direction = 1
+layout_mode = 2
+tooltip_text = "Units above the surface"
+theme = SubResource("Theme_fphdo")
+step = 0.001
+allow_greater = true
+allow_lesser = true
+
+[node name="Mask select" type="Button" parent="Buttons"]
+layout_mode = 2
+tooltip_text = "Collision mask"
+icon = ExtResource("5_db7k0")
+
+[node name="Key tips" type="Label" parent="Buttons"]
+layout_mode = 2
+tooltip_text = "Hold key to change brush
+Alt - delete
+Shift - subdivide
+Spacebar - move"
+mouse_filter = 0
+text = "info"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Mask selection" type="Popup" parent="."]
+size = Vector2i(502, 67)
+
+[node name="Panel" type="Panel" parent="Mask selection"]
+offset_right = 498.0
+offset_bottom = 67.0
+
+[node name="1" type="GridContainer" parent="Mask selection/Panel"]
+layout_mode = 1
+offset_right = 241.0
+offset_bottom = 70.0
+columns = 8
+
+[node name="1" type="Button" parent="Mask selection/Panel/1"]
+layout_mode = 2
+toggle_mode = true
+text = "1"
+
+[node name="2" type="Button" parent="Mask selection/Panel/1"]
+layout_mode = 2
+toggle_mode = true
+text = "2"
+
+[node name="3" type="Button" parent="Mask selection/Panel/1"]
+layout_mode = 2
+toggle_mode = true
+text = "3"
+
+[node name="4" type="Button" parent="Mask selection/Panel/1"]
+layout_mode = 2
+toggle_mode = true
+text = "4"
+
+[node name="5" type="Button" parent="Mask selection/Panel/1"]
+layout_mode = 2
+toggle_mode = true
+text = "5"
+
+[node name="6" type="Button" parent="Mask selection/Panel/1"]
+layout_mode = 2
+toggle_mode = true
+text = "6"
+
+[node name="7" type="Button" parent="Mask selection/Panel/1"]
+layout_mode = 2
+toggle_mode = true
+text = "7"
+
+[node name="8" type="Button" parent="Mask selection/Panel/1"]
+layout_mode = 2
+toggle_mode = true
+text = "8"
+
+[node name="9" type="Button" parent="Mask selection/Panel/1"]
+layout_mode = 2
+toggle_mode = true
+text = "9"
+
+[node name="10" type="Button" parent="Mask selection/Panel/1"]
+layout_mode = 2
+toggle_mode = true
+text = "10"
+
+[node name="11" type="Button" parent="Mask selection/Panel/1"]
+layout_mode = 2
+toggle_mode = true
+text = "11"
+
+[node name="12" type="Button" parent="Mask selection/Panel/1"]
+layout_mode = 2
+toggle_mode = true
+text = "12"
+
+[node name="13" type="Button" parent="Mask selection/Panel/1"]
+layout_mode = 2
+toggle_mode = true
+text = "13"
+
+[node name="14" type="Button" parent="Mask selection/Panel/1"]
+layout_mode = 2
+toggle_mode = true
+text = "14"
+
+[node name="15" type="Button" parent="Mask selection/Panel/1"]
+layout_mode = 2
+toggle_mode = true
+text = "15"
+
+[node name="16" type="Button" parent="Mask selection/Panel/1"]
+layout_mode = 2
+toggle_mode = true
+text = "16"
+
+[node name="2" type="GridContainer" parent="Mask selection/Panel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -244.0
+offset_bottom = 70.0
+grow_horizontal = 0
+columns = 8
+
+[node name="17" type="Button" parent="Mask selection/Panel/2"]
+layout_mode = 2
+toggle_mode = true
+text = "17"
+
+[node name="18" type="Button" parent="Mask selection/Panel/2"]
+layout_mode = 2
+toggle_mode = true
+text = "18"
+
+[node name="19" type="Button" parent="Mask selection/Panel/2"]
+layout_mode = 2
+toggle_mode = true
+text = "19"
+
+[node name="20" type="Button" parent="Mask selection/Panel/2"]
+layout_mode = 2
+toggle_mode = true
+text = "20"
+
+[node name="21" type="Button" parent="Mask selection/Panel/2"]
+layout_mode = 2
+toggle_mode = true
+text = "21"
+
+[node name="22" type="Button" parent="Mask selection/Panel/2"]
+layout_mode = 2
+toggle_mode = true
+text = "22"
+
+[node name="23" type="Button" parent="Mask selection/Panel/2"]
+layout_mode = 2
+toggle_mode = true
+text = "23"
+
+[node name="24" type="Button" parent="Mask selection/Panel/2"]
+layout_mode = 2
+toggle_mode = true
+text = "24"
+
+[node name="25" type="Button" parent="Mask selection/Panel/2"]
+layout_mode = 2
+toggle_mode = true
+text = "25"
+
+[node name="26" type="Button" parent="Mask selection/Panel/2"]
+layout_mode = 2
+toggle_mode = true
+text = "26"
+
+[node name="27" type="Button" parent="Mask selection/Panel/2"]
+layout_mode = 2
+toggle_mode = true
+text = "27"
+
+[node name="28" type="Button" parent="Mask selection/Panel/2"]
+layout_mode = 2
+toggle_mode = true
+text = "28"
+
+[node name="29" type="Button" parent="Mask selection/Panel/2"]
+layout_mode = 2
+toggle_mode = true
+text = "29"
+
+[node name="30" type="Button" parent="Mask selection/Panel/2"]
+layout_mode = 2
+toggle_mode = true
+text = "30"
+
+[node name="31" type="Button" parent="Mask selection/Panel/2"]
+layout_mode = 2
+toggle_mode = true
+text = "31"
+
+[node name="32" type="Button" parent="Mask selection/Panel/2"]
+layout_mode = 2
+toggle_mode = true
+text = "32"

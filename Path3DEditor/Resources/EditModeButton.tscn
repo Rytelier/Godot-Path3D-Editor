@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://xvbf66cjym01"]
+
+[node name="EditModeButton" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Edit mode
+"

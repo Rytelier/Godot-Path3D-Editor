@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   height="16"
+   viewBox="0 0 16 16"
+   width="16"
+   version="1.1"
+   id="svg28"
+   sodipodi:docname="Mask.svg"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs32" />
+  <sodipodi:namedview
+     id="namedview30"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     showgrid="false"
+     inkscape:zoom="45.254834"
+     inkscape:cx="4.0990096"
+     inkscape:cy="4.9718446"
+     inkscape:window-width="2560"
+     inkscape:window-height="1387"
+     inkscape:window-x="-8"
+     inkscape:window-y="1072"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg28" />
+  <rect
+     style="fill:#ffffff;stroke:#ffffff;stroke-width:0.521025"
+     id="rect618-0"
+     width="6.3741207"
+     height="6.3741212"
+     x="0.8129397"
+     y="-7.1870613"
+     transform="rotate(90)" />
+  <rect
+     style="fill:#ffffff;stroke:#ffffff;stroke-width:0.521025"
+     id="rect618-0-5"
+     width="6.3741207"
+     height="6.3741212"
+     x="0.8129397"
+     y="-15.097818"
+     transform="rotate(90)" />
+  <rect
+     style="fill:#ffffff;stroke:#ffffff;stroke-width:0.521025"
+     id="rect618-0-3"
+     width="6.3741207"
+     height="6.3741212"
+     x="8.8120852"
+     y="-7.1870613"
+     transform="rotate(90)" />
+  <rect
+     style="fill:#ffffff;stroke:#ffffff;stroke-width:0.521025"
+     id="rect618-0-5-5"
+     width="6.3741207"
+     height="6.3741212"
+     x="8.8120852"
+     y="-15.097818"
+     transform="rotate(90)" />
+</svg>
