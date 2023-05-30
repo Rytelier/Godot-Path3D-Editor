@@ -5,7 +5,7 @@ Tool to edit path 3D in the editor viewport
 ## Changes
 1.1:
 - UI revamp
-- Height adjust action (hold V key)
+- Height adjust action (hold B key)
 
 ## Features
 - Place points on collision surface
