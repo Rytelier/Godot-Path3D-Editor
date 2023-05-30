@@ -1,50 +1,89 @@
-[gd_scene load_steps=7 format=3 uid="uid://cd83xcafgqmlh"]
+[gd_scene load_steps=9 format=3 uid="uid://cd83xcafgqmlh"]
 
+[ext_resource type="Script" path="res://addons/Path3DEditor/MovePanel.gd" id="1_2y6rs"]
 [ext_resource type="Texture2D" uid="uid://2t6xnphtxwl2" path="res://addons/Path3DEditor/Resources/Add.svg" id="1_eockk"]
 [ext_resource type="Texture2D" uid="uid://bm56hsyig7b61" path="res://addons/Path3DEditor/Resources/Delete.svg" id="2_ini6o"]
 [ext_resource type="Texture2D" uid="uid://bsqs0w2rdfetm" path="res://addons/Path3DEditor/Resources/Move.svg" id="3_2iwpg"]
 [ext_resource type="Texture2D" uid="uid://d11vb2kyw1ssd" path="res://addons/Path3DEditor/Resources/Subdivide.svg" id="4_rgn5c"]
 [ext_resource type="Texture2D" uid="uid://bpqlie2qp1jtr" path="res://addons/Path3DEditor/Resources/Mask.svg" id="5_db7k0"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_824nc"]
+
 [sub_resource type="Theme" id="Theme_fphdo"]
 LineEdit/constants/minimum_character_width = 1
 
-[node name="Path3DEdit" type="Panel"]
+[node name="Path3DEdit" type="Control"]
 custom_minimum_size = Vector2(45, 0)
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 45.0
+layout_mode = 3
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 9.0
+offset_top = -95.0
+offset_right = 119.0
+offset_bottom = 93.0
 grow_vertical = 2
+mouse_filter = 1
 
-[node name="Buttons" type="VBoxContainer" parent="."]
+[node name="Container" type="BoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = -1
+anchor_right = 0.773
 anchor_bottom = 1.0
+offset_right = -0.0300064
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 2
+vertical = true
 
-[node name="Add" type="Button" parent="Buttons"]
+[node name="Move" type="Button" parent="Container"]
+custom_minimum_size = Vector2(30, 15)
+layout_mode = 2
+size_flags_horizontal = 0
+tooltip_text = "Move panel"
+action_mode = 0
+script = ExtResource("1_2y6rs")
+
+[node name="HSeparator" type="HSeparator" parent="Container"]
+layout_mode = 2
+theme_override_constants/separation = 4
+theme_override_styles/separator = SubResource("StyleBoxEmpty_824nc")
+
+[node name="Buttons" type="GridContainer" parent="Container"]
+layout_mode = 2
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 2
+columns = 2
+
+[node name="Add" type="Button" parent="Container/Buttons"]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 tooltip_text = "Add"
 icon = ExtResource("1_eockk")
+icon_alignment = 1
 
-[node name="Delete" type="Button" parent="Buttons"]
+[node name="Delete" type="Button" parent="Container/Buttons"]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 tooltip_text = "Delete (alt)"
 icon = ExtResource("2_ini6o")
+icon_alignment = 1
 
-[node name="Move" type="Button" parent="Buttons"]
+[node name="Move" type="Button" parent="Container/Buttons"]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 tooltip_text = "Move (space)"
 icon = ExtResource("3_2iwpg")
+icon_alignment = 1
 
-[node name="Subdivide" type="Button" parent="Buttons"]
+[node name="Subdivide" type="Button" parent="Container/Buttons"]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 tooltip_text = "Subdivide (shift)"
 icon = ExtResource("4_rgn5c")
+icon_alignment = 1
 
-[node name="Above" type="SpinBox" parent="Buttons"]
+[node name="Above" type="SpinBox" parent="Container"]
 layout_direction = 1
 layout_mode = 2
 tooltip_text = "Units above the surface"
@@ -53,21 +92,27 @@ step = 0.001
 allow_greater = true
 allow_lesser = true
 
-[node name="Mask select" type="Button" parent="Buttons"]
+[node name="Mask select" type="Button" parent="Container"]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+size_flags_horizontal = 0
 tooltip_text = "Collision mask"
 icon = ExtResource("5_db7k0")
 
-[node name="Key tips" type="Label" parent="Buttons"]
+[node name="Key tips" type="Label" parent="Container"]
 layout_mode = 2
 tooltip_text = "Hold key to change brush
 Alt - delete
 Shift - subdivide
-Spacebar - move"
+Spacebar - move
+V - adjust height"
 mouse_filter = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 2
+theme_override_font_sizes/font_size = 14
 text = "info"
-horizontal_alignment = 1
 vertical_alignment = 1
+uppercase = true
 
 [node name="Mask selection" type="Popup" parent="."]
 size = Vector2i(502, 67)

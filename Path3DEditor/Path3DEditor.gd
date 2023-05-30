@@ -3,8 +3,10 @@ extends EditorPlugin
 
 var panelScene = preload("res://addons/Path3DEditor/Resources/Path3DEdit.tscn")
 var editModeButtonScene = preload("res://addons/Path3DEditor/Resources/EditModeButton.tscn")
+var heightPreviewScene = preload("res://addons/Path3DEditor/Resources/HeightPreview.tscn")
 var editModeButton
 var panel
+var panelContainer
 var selection
 var buttonOn = false
 
@@ -21,6 +23,8 @@ var buttonMask
 
 var brushScene = preload("res://addons/Path3DEditor/Resources/Brush.tscn")
 var brush : Node3D
+var heightPreview : Node3D
+var heightPreviewNumber : Label3D
 var brushPointer : Node3D
 var path : Path3D
 var pointSelected = 0
@@ -29,34 +33,39 @@ var undo
 var maskSelect : Popup
 var maskButtons : Array[Node]
 
+var viewport3DContainer
+var panelAdded = false
+
 #Brush types
 var ADD = 0
 var DELETE = 1
 var SUBDIVIDE = 2
 var MOVE = 3
+var HEIGHTSET = 4
 
-var brushColors = [Color.GREEN, Color.RED, Color.DARK_GOLDENROD, Color.ORANGE]
-var brushShowPointer = [true, false, true, true]
-var brushKeys = [KEY_ALT, KEY_SHIFT, KEY_SPACE] #Starting from 1
+var brushColors = [Color.GREEN, Color.RED, Color.DARK_GOLDENROD, Color.ORANGE, Color.TRANSPARENT]
+var brushShowPointer = [true, false, true, true, false]
+var brushKeys = [KEY_ALT, KEY_SHIFT, KEY_SPACE, KEY_B] #Starting from 1
 
 func _enter_tree():
 	editModeButton = editModeButtonScene.instantiate()
 	editModeButton.pressed.connect(SwitchPanel.bind())
 	panel = panelScene.instantiate()
+	panelContainer = panel.get_child(0)
 	selection = get_editor_interface().get_selection()
 	selection.selection_changed.connect(AddEditModeButton.bind())
 	selection.selection_changed.connect(RemoveEditModeButton.bind())
 	
-	buttonAdd = panel.get_node("Buttons/Add")
+	buttonAdd = panelContainer.get_node("Buttons/Add")
 	buttonAdd.pressed.connect(SetBrush.bind(ADD))
-	buttonDelete = panel.get_node("Buttons/Delete")
+	buttonDelete = panelContainer.get_node("Buttons/Delete")
 	buttonDelete.pressed.connect(SetBrush.bind(DELETE))
-	buttonSubdivide = panel.get_node("Buttons/Subdivide")
+	buttonSubdivide = panelContainer.get_node("Buttons/Subdivide")
 	buttonSubdivide.pressed.connect(SetBrush.bind(SUBDIVIDE))
-	buttonMove = panel.get_node("Buttons/Move")
+	buttonMove = panelContainer.get_node("Buttons/Move")
 	buttonMove.pressed.connect(SetBrush.bind(MOVE))
-	above = panel.get_node("Buttons/Above")
-	buttonMask = panel.get_node("Buttons/Mask select")
+	above = panelContainer.get_node("Above")
+	buttonMask = panelContainer.get_node("Mask select")
 	
 	maskSelect = panel.get_node("Mask selection")
 	maskButtons = maskSelect.get_node("Panel/1").get_children()
@@ -71,12 +80,19 @@ func _enter_tree():
 func _exit_tree():
 	RemoveEditModeButton()
 	SwitchPanel(true)
+	editModeButton.queue_free()
+	panel.queue_free()
 
 func _handles(object):
 	if object.get_class() == "Path3D":
 		return true
 
 func _forward_3d_gui_input(viewport_camera, event):
+	if viewport3DContainer == null:
+		viewport3DContainer = viewport_camera.get_viewport().get_node("../..").get_child(1)
+		if !panelAdded:
+			viewport3DContainer.add_child(panel)
+
 	if inEditMode:
 		#Set brush
 		if event is InputEventKey:
@@ -150,7 +166,18 @@ func _forward_3d_gui_input(viewport_camera, event):
 		if ray.has("position"):
 			var pos = ray.position + ray.normal * above.value
 			
-			if (brushSelected == DELETE or brushSelected == SUBDIVIDE or brushSelected == MOVE) and !brushHold:
+			if event is InputEventMouseMotion:
+				if brushSelected == HEIGHTSET:
+					above.value += event.relative.y*0.01
+			
+			if brushSelected == HEIGHTSET:
+				heightPreview.visible = true
+				heightPreview.position = pos
+				heightPreviewNumber.text = above.value
+			else:
+				heightPreview.visible = false
+			
+			if (brushSelected == DELETE or brushSelected == SUBDIVIDE or brushSelected == MOVE or brushSelected == HEIGHTSET) and !brushHold:
 				var maxdist = 9999
 				for p in path.curve.point_count:
 					if path.curve.get_point_position(p).distance_to(pos) < maxdist:
@@ -210,7 +237,8 @@ func RemoveEditModeButton(close = false):
 func SwitchPanel(close = false):
 	if close:
 		if inEditMode:
-			remove_control_from_container(EditorPlugin.CONTAINER_SPATIAL_EDITOR_SIDE_LEFT, panel)
+			panel.visible = false
+			
 			brush.queue_free()
 			brushPointer.queue_free()
 			inEditMode = false
@@ -218,17 +246,27 @@ func SwitchPanel(close = false):
 		return
 	
 	if !inEditMode:
-		add_control_to_container(EditorPlugin.CONTAINER_SPATIAL_EDITOR_SIDE_LEFT, panel)
+		panel.visible = true
+		
 		brush = brushScene.instantiate()
 		get_editor_interface().get_edited_scene_root().add_child(brush)
 		brushPointer = brush.get_node("Pointer")
 		brushPointer.reparent(brush.get_parent())
 		SetBrush(ADD)
+		
+		heightPreview = heightPreviewScene.instantiate()
+		get_editor_interface().get_edited_scene_root().add_child(heightPreview)
+		heightPreviewNumber = heightPreview.get_child(0)
+		heightPreview.visible = false
+		
 		inEditMode = true
 	else:
-		remove_control_from_container(EditorPlugin.CONTAINER_SPATIAL_EDITOR_SIDE_LEFT, panel)
+		panel.visible = false
+		
 		brush.queue_free()
 		brushPointer.queue_free()
+		heightPreview.queue_free()
+		
 		inEditMode = false
 
 #

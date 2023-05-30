@@ -2,6 +2,11 @@
 
 Tool to edit path 3D in the editor viewport
 
+## Changes
+1.1:
+- UI revamp
+- Height adjust action (hold V key)
+
 ## Features
 - Place points on collision surface
 - Add, delete, subdivide and move point brushes
