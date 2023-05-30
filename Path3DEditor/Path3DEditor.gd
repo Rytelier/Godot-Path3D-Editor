@@ -110,7 +110,7 @@ func _forward_3d_gui_input(viewport_camera, event):
 					undo.create_action("Path3D: add point")
 					undo.add_undo_property(path, 'curve', path.curve.duplicate())
 					
-					path.curve.add_point(brush.position)
+					path.curve.add_point(brush.position - path.position)
 					
 					undo.add_do_property(path, 'curve', path.curve.duplicate())
 					undo.commit_action()
@@ -126,7 +126,7 @@ func _forward_3d_gui_input(viewport_camera, event):
 					undo.create_action("Path3D: subdivide segment")
 					undo.add_undo_property(path, 'curve', path.curve.duplicate())
 					
-					path.curve.add_point(brush.position, Vector3.ZERO, Vector3.ZERO, pointSelected)
+					path.curve.add_point(brush.position - path.position, Vector3.ZERO, Vector3.ZERO, pointSelected)
 					
 					undo.add_do_property(path, 'curve', path.curve.duplicate())
 					undo.commit_action()
@@ -145,7 +145,7 @@ func _forward_3d_gui_input(viewport_camera, event):
 		#Mouse hold down brush
 		if brushHold:
 			if brushSelected == MOVE:
-				path.curve.set_point_position(pointSelected, brush.position)
+				path.curve.set_point_position(pointSelected, brush.position - path.position)
 		
 		#Collision mask
 		var mask : int = 0
