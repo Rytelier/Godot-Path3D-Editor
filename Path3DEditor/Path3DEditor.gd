@@ -180,19 +180,19 @@ func _forward_3d_gui_input(viewport_camera, event):
 			if (brushSelected == DELETE or brushSelected == SUBDIVIDE or brushSelected == MOVE or brushSelected == HEIGHTSET) and !brushHold:
 				var maxdist = 9999
 				for p in path.curve.point_count:
-					if path.curve.get_point_position(p).distance_to(pos) < maxdist:
-						maxdist = path.curve.get_point_position(p).distance_to(pos)
+					if (path.curve.get_point_position(p) + path.position).distance_to(pos) < maxdist:
+						maxdist = (path.curve.get_point_position(p) + path.position).distance_to(pos)
 						
 						if brushSelected == DELETE:
-							brush.position = path.curve.get_point_position(p)
+							brush.position = path.curve.get_point_position(p) + path.position
 							pointSelected = p
 						elif brushSelected == SUBDIVIDE or brushSelected == MOVE:
 							brush.position = pos
-							DrawLine(brushPointer.mesh, pos, path.curve.get_point_position(p))
+							DrawLine(brushPointer.mesh, pos, path.curve.get_point_position(p) + path.position)
 							pointSelected = p
 			else:
 				if(path.curve.point_count != 0):
-					DrawLine(brushPointer.mesh, pos, path.curve.get_point_position(path.curve.point_count-1))
+					DrawLine(brushPointer.mesh, pos, path.curve.get_point_position(path.curve.point_count-1) + path.position)
 				brush.position = pos
 		return EditorPlugin.AFTER_GUI_INPUT_CUSTOM
 
