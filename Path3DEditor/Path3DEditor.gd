@@ -110,7 +110,7 @@ func _forward_3d_gui_input(viewport_camera, event):
 					undo.create_action("Path3D: add point")
 					undo.add_undo_property(path, 'curve', path.curve.duplicate())
 					
-					path.curve.add_point(brush.position - path.position)
+					path.curve.add_point(brush.position - path.global_position)
 					
 					undo.add_do_property(path, 'curve', path.curve.duplicate())
 					undo.commit_action()
@@ -126,7 +126,7 @@ func _forward_3d_gui_input(viewport_camera, event):
 					undo.create_action("Path3D: subdivide segment")
 					undo.add_undo_property(path, 'curve', path.curve.duplicate())
 					
-					path.curve.add_point(brush.position - path.position, Vector3.ZERO, Vector3.ZERO, pointSelected)
+					path.curve.add_point(brush.position - path.global_position, Vector3.ZERO, Vector3.ZERO, pointSelected)
 					
 					undo.add_do_property(path, 'curve', path.curve.duplicate())
 					undo.commit_action()
@@ -184,15 +184,15 @@ func _forward_3d_gui_input(viewport_camera, event):
 						maxdist = (path.curve.get_point_position(p) + path.position).distance_to(pos)
 						
 						if brushSelected == DELETE:
-							brush.position = path.curve.get_point_position(p) + path.position
+							brush.position = path.curve.get_point_position(p) + path.global_position
 							pointSelected = p
 						elif brushSelected == SUBDIVIDE or brushSelected == MOVE:
 							brush.position = pos
-							DrawLine(brushPointer.mesh, pos, path.curve.get_point_position(p) + path.position)
+							DrawLine(brushPointer.mesh, pos, path.curve.get_point_position(p) + path.global_position)
 							pointSelected = p
 			else:
 				if(path.curve.point_count != 0):
-					DrawLine(brushPointer.mesh, pos, path.curve.get_point_position(path.curve.point_count-1) + path.position)
+					DrawLine(brushPointer.mesh, pos, path.curve.get_point_position(path.curve.point_count-1) + path.global_position)
 				brush.position = pos
 		return EditorPlugin.AFTER_GUI_INPUT_CUSTOM
 
